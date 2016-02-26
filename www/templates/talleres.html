@@ -1,0 +1,39 @@
+<ion-view>
+    <ion-nav-title>Talleres</ion-nav-title>
+
+    <ion-content class="has-header" padding="true">
+
+
+        <!-- div class="subheader filter">
+            Filtrar siniestros
+            <select ng-model="response.estado" ng-options="e as e.label for e in select.estados"
+                    style="width:auto !important;"></select>
+            mayores a
+            <select ng-model="response.valor" ng-options="v as v.label for v in select.valores"
+                    style="width:auto !important;"></select>
+
+            <button style="float:right !important" ng-click="clearFilter()">Ver Todo</button>
+        </div-->
+
+        <div class="card tcard" ng-repeat="taller in talleres">
+            <div class="item item-divider">{{taller.nombre | capitalize}}</div>
+            <div class="item item-text-wrap">
+                <ion-list>
+                    <ion-item ng-repeat="suc in taller.sucursales | filter: filtraTalleres"
+                              ng-click="showSucursal(suc)">
+                        <div class="row">
+                            <div class="col title col-67">{{suc.nombre | capitalize}}</div>
+                            <div class="col info alert {{badgeClass(suc.n_noinspec)}}">{{suc.n_noinspec}}</div>
+                            <div class="col info {{badgeClass(suc.n_sindoc)}}">{{suc.n_sindoc}}</div>
+                            <div class="col info {{badgeClass(suc.n_sintiempo)}}">{{suc.n_sintiempo}}</div>
+                            <div class="col info {{badgeClass(suc.n_enrepara)}}">{{suc.n_enrepara}}</div>
+                            <!--div class="col tcol"><span class="{{ badgeClass(suc.n_noconformidad) }}">{{suc.n_noconformidad}}</span></div-->
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+
+    </ion-content>
+
+</ion-view>

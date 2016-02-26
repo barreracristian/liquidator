@@ -1,0 +1,60 @@
+<ion-view>
+    <ion-nav-title>{{sucursal.taller.nombre | capitalize}}</ion-nav-title>
+
+    <ion-header-bar align-title="center" class="bar-subheader bar-positive">
+        <h1 class="title">{{sucursal.nombre}}</h1>
+    </ion-header-bar>
+
+    <ion-content class="has-subheader" padding="true">
+
+    <!--div class="subheader filter">
+        Mostrar solo siniestros
+        <select ng-model="response.estado" ng-options="e as e.label for e in select.estados" style="width:auto !important;"></select>
+
+        <button style="float:right !important" ng-click="clearFilter()">Ver Todo</button>
+    </div-->
+
+    <div class="card scard" ng-repeat="siniestro in sucursal.siniestros | filter: filtraSiniestros " ng-click="showSiniestro(siniestro)">
+        <div class="item item-divider">
+            <span style="float: left;">Siniestro {{siniestro.id}}</span>
+            <span style="float: right;">{{siniestro.estado}}</span>
+        </div>
+        <div class="item item-text-wrap">
+            <div class="row">
+                <div class="col col-image">
+                    <img ng-src="img/marcas/{{siniestro.marca | imagename}}.png">
+                </div>
+                <div class="col col-details">
+                    <div class="row">
+                        <div class="col">
+                            {{siniestro.marca}} / {{siniestro.modelo}}
+                            <br/> {{siniestro.ano}} - {{siniestro.color}}
+                            <br/>
+                            <b>{{siniestro.patente}}</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-10 col-icon">
+                            <i class="icon ion-person"></i>
+                        </div>
+                        <div class="col">{{siniestro.asegurado.nombre}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-10 col-icon">
+                            <i class="icon ion-card"></i>
+                        </div>
+                        <div class="col">{{siniestro.asegurado.rut}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-10 col-icon"><i class="icon ion-android-call"></i>
+                        </div>
+                        <div class="col">{{siniestro.asegurado.fono}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </ion-content>
+
+</ion-view>

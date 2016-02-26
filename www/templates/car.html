@@ -1,0 +1,28 @@
+<ion-content scroll="false" style="background-color:#112C5E !important;">
+
+    <style type="text/css">
+
+        #content{
+            position: absolute;
+            top: 70px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            overflow:hidden;
+        }
+        #canvas{
+            cursor:crosshair ;
+            background-color:#fff;
+        }
+    </style>
+
+    <div>
+        <div style="text-align:center; padding:10px 10px 0 10px;">
+            <button class="button button-positive" ng-click="newCanvas()" style="float:left;">Nuevo</button>
+            <button class="button button-balanced" ng-click="save()">Guardar y Volver</button>
+            <button class="button button-positive" ng-click="" style="float:right;">Deshacer</button>
+        </div>
+        <div id="content"></div>
+    </div>
+
+</ion-content>

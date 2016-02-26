@@ -1,6 +1,21 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
-node_modules/
-platforms/
-plugins/
+/node_modules/
+/www/
+
+.idea
+.temp
+*.DS_Store
+*.iml
+*.ipr
+*.iws
+
+# android platforms
+/platforms/android/.gradle
+/platforms/android/assets/www
+/platforms/android/build
+/platforms/android/cordova-plugin-crosswalk-webview/cbook-xwalk_core_library/build
+/platforms/android/CordovaLib/build
+/apks/
+Status API Training Shop Blog About Pricing

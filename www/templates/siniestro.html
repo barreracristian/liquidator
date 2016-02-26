@@ -1,0 +1,106 @@
+<ion-view>
+    <ion-nav-title>Siniestro {{siniestro.id}}</ion-nav-title>
+
+    <ion-content class="has-header" padding="true">
+
+        <div class="card sincard" style="margin-top:10px;">
+            <div class="sincontainer" style="width:40%;">
+                <span>{{siniestro.marca}} / {{siniestro.modelo}}</span>
+                <span>{{siniestro.ano}} - {{siniestro.color}}</span>
+                <span>{{siniestro.patente}}</span>
+            </div>
+            <div class="sincontainer" style="float:right; width:50%;">
+                <span>{{siniestro.asegurado.nombre}}</span>
+                <span>{{siniestro.asegurado.rut}}</span>
+                <span>{{siniestro.asegurado.fono}}</span>
+            </div>
+            <div class="sincontainer" style="float:right; width:auto;">
+                <span><i class="icon ion-person"></i></span>
+                <span><i class="icon ion-card"></i></span>
+                <span><i class="icon ion-android-call"></i></span>
+            </div>
+            <hr/>
+            <div class="sincontainer">
+                <span>{{siniestro.relato}}</span>
+            </div>
+        </div>
+
+        <div class="card sincard">
+            <div class="sincontainer">
+            <span class="action" ng-show="!siniestro.fotos.inspeccion" ng-click="showCar(siniestro)">
+                No existe imagen. Click para crear
+            </span>
+
+                <center ng-hide="!siniestro.fotos.inspeccion" ng-click="showCar(siniestro)">
+                    <img class="inspeccion" ng-src="{{siniestro.fotos.inspeccion}}"/>
+                </center>
+            </div>
+            <hr/>
+            <div class="sincontainer">
+                <textarea placeholder="Escribir comentarios aqui" style="height: 100px"></textarea>
+            </div>
+            <hr/>
+            <div class="sincontainer" ng-show="siniestro.fotos.libres.length > 0"
+                 style="padding:0;background-color:#005094">
+                <div class="imglibre" ng-repeat="foto in siniestro.fotos.libres">
+                    <img ng-src="{{foto}}"/>
+                </div>
+            </div>
+            <hr ng-show="siniestro.fotos.libres.length > 0"/>
+            <div class="sinlistitem action" ng-click="takePicture('libre')">
+                Tomar Fotos
+                <i class="icon ion-camera action"></i>
+            </div>
+        </div>
+
+        <div class="card sincard">
+            <div class="sinlistitem">
+                Dcto. Constancia Carabineros
+                <i class="icon ion-camera action" ng-click="takePicture('constancia')"
+                   ng-show="!siniestro.fotos.constancia"></i>
+                <i class="icon ion-checkmark-circled action done" ng-hide="!siniestro.fotos.constancia"></i>
+            </div>
+            <div class="sinlistitem">
+                Dcto. Padron Auto
+                <i class="icon ion-camera action" ng-click="takePicture('padron')"
+                   ng-show="!siniestro.fotos.padron"></i>
+                <i class="icon ion-checkmark-circled action done" ng-hide="!siniestro.fotos.padron"></i>
+            </div>
+            <div class="sinlistitem">
+                Dcto. Licencia de Conducir
+                <i class="icon ion-camera action" ng-click="takePicture('licencia')"
+                   ng-show="!siniestro.fotos.licencia"></i>
+                <i class="icon ion-checkmark-circled action done" ng-hide="!siniestro.fotos.licencia"></i>
+            </div>
+        </div>
+
+        <div class="card sincard" style="text-align:center; vertical-align:middle;">
+            <div class="sincontainer minibutton" ng-click="repairType = 'time'">
+                <span>Tiempo de reparacion<i class="icon ion-clock" style="float:right; padding-right:10px;"></i></span>
+            </div>
+            <span style="color:#FFF; line-height:40px;">ó</span>
+
+            <div class="sincontainer minibutton" style="float:right" ng-click="repairType = 'date'">
+                <span>Fecha de reparación<i class="icon ion-calendar"
+                                            style="float:right; padding-right:10px;"></i></span>
+            </div>
+
+            <hr ng-show="repairType"/>
+            <div style="background-color:#FFF; padding:10px; text-align:left;" ng-show="repairType == 'time'">
+                <div style="display:inline;">Ingrese numero de dias que demora la reparación:</div>
+                &nbsp;
+                <input style="display:inline;" type="text" size="2" placeholder="Ej:10"/>
+
+                <div style="display:inline;">dias</div>
+            </div>
+            <div style="background-color:#FFF; padding:10px; text-align:left;" ng-show="repairType == 'date'">
+                <div style="display:inline;">Ingrese la fecha de termino de la reparacion:</div>
+                &nbsp;
+                <input style="display:inline;" type="text" size="10" placeholder="Ej: 2015/04/12"/>
+            </div>
+        </div>
+
+        <button class="button button-block button-balanced">Guardar</button>
+
+    </ion-content>
+</ion-view>
