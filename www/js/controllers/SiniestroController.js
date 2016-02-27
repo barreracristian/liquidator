@@ -2,6 +2,12 @@ angular.module('liquidator.controllers.SiniestroController', [])
 
     .controller('SiniestroController', function ($scope, $rootScope, $ionicPopup, $stateParams, $state, DBService, Camera) {
 
+        $scope.documentos = [
+            {name:"Dcto. Constancia Carabineros", id:"constancia"},
+            {name:"Dcto. Padron Auto", id:"padron"},
+            {name:"Dcto. Licencia de Conducir", id:"licencia"},
+        ];
+
         DBService.getSiniestro($stateParams.siniestro_id).then(
             function (siniestro) {
                 $scope.siniestro = siniestro;

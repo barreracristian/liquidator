@@ -11,12 +11,6 @@ angular.module('liquidator.controllers.TalleresController', [])
                 }
             );
 
-            $scope.showSucursal = function (sucursal) {
-                $state.transitionTo('sucursal', {
-                    sucursal_id: sucursal.id
-                });
-            };
-
             $scope.clearFilter = function () {
                 $scope.response = {};
                 $scope.response.estado = null;

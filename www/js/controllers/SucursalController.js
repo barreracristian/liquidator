@@ -11,12 +11,6 @@ angular.module('liquidator.controllers.SucursalController', [])
                 }
             );
 
-            $scope.showSiniestro = function (siniestro) {
-                $state.go('siniestro', {
-                    siniestro_id: siniestro.id
-                });
-            };
-
             $scope.clearFilter = function () {
                 $scope.response = {};
                 $scope.response.estado = null;

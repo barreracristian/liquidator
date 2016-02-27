@@ -1,68 +1,37 @@
-<ion-header-bar align-title="center" class="bar-positive">
-    <div class="buttons">
-        <button class="button button-icon icon ion-chevron-left" ng-click="goBack('busqueda')"></button>
-    </div>
-    <h1 class="title">Resultados Busqueda</h1>
-    <div class="buttons">
-        <button class="button button-icon icon ion-search" ng-click="search()"></button>
-    </div>
-</ion-header-bar>
-<ion-header-bar align-title="center" class="bar-subheader bar-positive">
-    <h1 class="title">"{{busqueda}}"</h1>
-</ion-header-bar>
+<ion-view>
+    <ion-nav-title>Busqueda "{{busqueda}}"</ion-nav-title>
 
-<!--div class="subheader filter">
-    Mostrar solo siniestros
-    <select ng-model="response.estado" ng-options="e as e.label for e in select.estados" style="width:auto !important;"></select>
+    <!--div class="subheader filter">
+        Mostrar solo siniestros
+        <select ng-model="response.estado" ng-options="e as e.label for e in select.estados" style="width:auto !important;"></select>
 
-    <button style="float:right !important" ng-click="clearFilter()">Ver Todo</button>
-</div-->
+        <button style="float:right !important" ng-click="clearFilter()">Ver Todo</button>
+    </div-->
 
-<ion-content class="padding has-subheader">
+    <ion-content class="has-header" padding="true">
 
-<div class="card scard" ng-repeat="siniestro in siniestros | filter: filtraSiniestros" ng-click="showSiniestro(siniestro)">
-       <div class="item item-divider item-dark">
-            <span style="float: left;">Siniestro {{siniestro.id}}</span>
-            <span style="float: right;">{{siniestro.estado}}</span>
-        </div>
-        <div class="item item-divider item-subheader">
-            <span style="float: left;">{{siniestro.taller.nombre}}</span>
-            <span style="float: right;">{{siniestro.sucursal.nombre}}</span>
-        </div>
-        <div class="item item-text-wrap">
-            <div class="row">
-                <div class="col col-image">
-                    <img ng-src="img/marcas/{{siniestro.marca | imagename}}.png">
-                </div>
-                <div class="col col-details">
-                    <div class="row">
-                        <div class="col">
-                            {{siniestro.marca}} / {{siniestro.modelo}}
-                            <br/> {{siniestro.ano}} - {{siniestro.color}}
-                            <br/>
-                            <b>{{siniestro.patente}}</b>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-10 col-icon">
-                            <i class="icon ion-person"></i>
-                        </div>
-                        <div class="col">{{siniestro.asegurado.nombre}}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-10 col-icon">
-                            <i class="icon ion-card"></i>
-                        </div>
-                        <div class="col">{{siniestro.asegurado.rut}}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-10 col-icon"><i class="icon ion-android-call"></i>
-                        </div>
-                        <div class="col">{{siniestro.asegurado.fono}}</div>
-                    </div>
-                </div>
+        <div class="list card" ng-repeat="siniestro in siniestros | filter: filtraSiniestros">
+
+            <div class="item item-divider">
+                {{siniestro.taller.nombre}}<br>{{siniestro.sucursal.nombre}}
             </div>
-        </div>
-    </div>
 
-</ion-content>
+            <a class="item item-thumbnail-left"
+               ng-href="#/siniestro/{{siniestro.id}}">
+                <img ng-src="img/marcas/{{siniestro.marca | imagename}}.png">
+
+                <h2>
+                    Siniestro {{siniestro.id}}
+                    <p style="float:right">{{siniestro.estado}}</p>
+                </h2>
+                <p>{{siniestro.marca}}, {{siniestro.modelo}}, {{siniestro.ano}}, {{siniestro.color}}</p>
+
+                <p><b>{{siniestro.patente}}</b></p>
+
+                <p>{{siniestro.asegurado.nombre}}</p>
+            </a>
+
+        </div>
+
+    </ion-content>
+</ion-view>

@@ -15,24 +15,22 @@
             <button style="float:right !important" ng-click="clearFilter()">Ver Todo</button>
         </div-->
 
-        <div class="card tcard" ng-repeat="taller in talleres">
+        <div class="list card" ng-repeat="taller in talleres">
             <div class="item item-divider">{{taller.nombre | capitalize}}</div>
-            <div class="item item-text-wrap">
-                <ion-list>
-                    <ion-item ng-repeat="suc in taller.sucursales | filter: filtraTalleres"
-                              ng-click="showSucursal(suc)">
-                        <div class="row">
-                            <div class="col title col-67">{{suc.nombre | capitalize}}</div>
-                            <div class="col info alert {{badgeClass(suc.n_noinspec)}}">{{suc.n_noinspec}}</div>
-                            <div class="col info {{badgeClass(suc.n_sindoc)}}">{{suc.n_sindoc}}</div>
-                            <div class="col info {{badgeClass(suc.n_sintiempo)}}">{{suc.n_sintiempo}}</div>
-                            <div class="col info {{badgeClass(suc.n_enrepara)}}">{{suc.n_enrepara}}</div>
-                            <!--div class="col tcol"><span class="{{ badgeClass(suc.n_noconformidad) }}">{{suc.n_noconformidad}}</span></div-->
-                        </div>
-                    </ion-item>
-                </ion-list>
-            </div>
+
+            <a class="item" ng-href="#/sucursal/{{suc.id}}"
+               ng-repeat="suc in taller.sucursales | filter: filtraTalleres">
+                {{suc.nombre | capitalize}}
+                <span class="badge badge-assertive">{{suc.n_noinspec}}</span>
+            </a>
         </div>
+
+        <!--div class="col title col-67">{{suc.nombre | capitalize}}</div>
+        <div class="col info alert {{badgeClass(suc.n_noinspec)}}">{{suc.n_noinspec}}</div>
+        <div class="col info {{badgeClass(suc.n_sindoc)}}">{{suc.n_sindoc}}</div>
+        <div class="col info {{badgeClass(suc.n_sintiempo)}}">{{suc.n_sintiempo}}</div>
+        <div class="col info {{badgeClass(suc.n_enrepara)}}">{{suc.n_enrepara}}</div>
+        <div class="col tcol"><span class="{{ badgeClass(suc.n_noconformidad) }}">{{suc.n_noconformidad}}</span></div-->
 
     </ion-content>
 

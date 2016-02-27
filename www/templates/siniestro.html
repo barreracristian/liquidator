@@ -3,104 +3,149 @@
 
     <ion-content class="has-header" padding="true">
 
-        <div class="card sincard" style="margin-top:10px;">
-            <div class="sincontainer" style="width:40%;">
-                <span>{{siniestro.marca}} / {{siniestro.modelo}}</span>
-                <span>{{siniestro.ano}} - {{siniestro.color}}</span>
-                <span>{{siniestro.patente}}</span>
+        <div class="list card">
+
+            <div class="item item-divider">
+                <i class="icon ion-model-s"></i>
+                Vehículo
             </div>
-            <div class="sincontainer" style="float:right; width:50%;">
-                <span>{{siniestro.asegurado.nombre}}</span>
-                <span>{{siniestro.asegurado.rut}}</span>
-                <span>{{siniestro.asegurado.fono}}</span>
-            </div>
-            <div class="sincontainer" style="float:right; width:auto;">
-                <span><i class="icon ion-person"></i></span>
-                <span><i class="icon ion-card"></i></span>
-                <span><i class="icon ion-android-call"></i></span>
-            </div>
-            <hr/>
-            <div class="sincontainer">
-                <span>{{siniestro.relato}}</span>
+
+            <div class="item item-avatar">
+                <img ng-src="img/marcas/{{siniestro.marca | imagename}}.png">
+
+                <h2>{{siniestro.marca}}, {{siniestro.modelo}}, {{siniestro.ano}}, {{siniestro.color}}</h2>
+
+                <p>{{siniestro.patente}}</p>
             </div>
         </div>
 
-        <div class="card sincard">
-            <div class="sincontainer">
-            <span class="action" ng-show="!siniestro.fotos.inspeccion" ng-click="showCar(siniestro)">
-                No existe imagen. Click para crear
-            </span>
+        <div class="list card">
 
-                <center ng-hide="!siniestro.fotos.inspeccion" ng-click="showCar(siniestro)">
-                    <img class="inspeccion" ng-src="{{siniestro.fotos.inspeccion}}"/>
-                </center>
+            <div class="item item-divider">
+                <i class="icon ion-person"></i>
+                Asegurado
             </div>
-            <hr/>
-            <div class="sincontainer">
+
+            <div class="item item-body">
+                <ul>
+                    <li>{{siniestro.asegurado.nombre}}</li>
+                    <li>{{siniestro.asegurado.rut}}</li>
+                </ul>
+            </div>
+
+            <div class="item item-button-right">
+                Llamar {{siniestro.asegurado.fono}}
+                <button class="button button-positive">
+                    <i class="icon ion-ios-telephone"></i>
+                </button>
+            </div>
+            <div class="item">
+                <p>{{siniestro.relato}}</p>
+            </div>
+
+            <!--p>
+                <a href="#" class="subdued">1 Like</a>
+                <a href="#" class="subdued">5 Comments</a>
+            </p-->
+        </div>
+
+        <div class="list card">
+
+            <div class="item item-divider">
+                <i class="icon ion-eye"></i>
+                Inspección
+            </div>
+
+            <div class="item item-button-right" ng-if="!siniestro.fotos.inspeccion">
+                No existe imagen. Click para crear
+                <button class="button button-positive" ng-click="showCar(siniestro)">
+                    <i class="icon ion-edit"></i>
+                </button>
+            </div>
+
+            <div class="item item-image" ng-if="siniestro.fotos.inspeccion" ng-click="showCar(siniestro)">
+                <img class="inspeccion" ng-src="{{siniestro.fotos.inspeccion}}">
+            </div>
+
+            <label class="item item-input">
                 <textarea placeholder="Escribir comentarios aqui" style="height: 100px"></textarea>
-            </div>
-            <hr/>
-            <div class="sincontainer" ng-show="siniestro.fotos.libres.length > 0"
-                 style="padding:0;background-color:#005094">
-                <div class="imglibre" ng-repeat="foto in siniestro.fotos.libres">
+            </label>
+
+            <div class="row" ng-show="siniestro.fotos.libres.length > 0">
+                <div class="col col-25" ng-repeat="foto in siniestro.fotos.libres">
                     <img ng-src="{{foto}}"/>
                 </div>
             </div>
-            <hr ng-show="siniestro.fotos.libres.length > 0"/>
-            <div class="sinlistitem action" ng-click="takePicture('libre')">
-                Tomar Fotos
-                <i class="icon ion-camera action"></i>
+
+            <div class="item">
+                <button class="button button-small button-block button-positive" ng-click="takePicture('libre')">
+                    Tomar Fotos
+                </button>
+            </div>
+
+        </div>
+
+        <div class="list card">
+
+            <div class="item item-divider">
+                <i class="icon ion-document-text"></i>
+                Documentos
+            </div>
+
+            <div class="item item-button-right" ng-repeat="doc in documentos">
+                {{doc.name}}
+                <button class="button button-positive"
+                        ng-if="!siniestro.fotos[doc.id]"
+                        ng-click="takePicture(doc.id)">
+                    <i class="icon ion-camera"></i>
+                </button>
+                <i class="icon ion-checkmark-circled action done" ng-if="siniestro.fotos[doc.id]"></i>
             </div>
         </div>
 
-        <div class="card sincard">
-            <div class="sinlistitem">
-                Dcto. Constancia Carabineros
-                <i class="icon ion-camera action" ng-click="takePicture('constancia')"
-                   ng-show="!siniestro.fotos.constancia"></i>
-                <i class="icon ion-checkmark-circled action done" ng-hide="!siniestro.fotos.constancia"></i>
+        <div class="list card">
+
+            <div class="item item-divider">
+                <i class="icon ion-settings"></i>
+                Reparación
             </div>
-            <div class="sinlistitem">
-                Dcto. Padron Auto
-                <i class="icon ion-camera action" ng-click="takePicture('padron')"
-                   ng-show="!siniestro.fotos.padron"></i>
-                <i class="icon ion-checkmark-circled action done" ng-hide="!siniestro.fotos.padron"></i>
+
+            <div class="item">
+                <div class="button-bar">
+                    <a class="button button-small button-positive" ng-click="repairType = 'time'">Tiempo</a>
+                    <a class="button button-small button-positive" ng-click="repairType = 'date'">Fecha</a>
+                </div>
             </div>
-            <div class="sinlistitem">
-                Dcto. Licencia de Conducir
-                <i class="icon ion-camera action" ng-click="takePicture('licencia')"
-                   ng-show="!siniestro.fotos.licencia"></i>
-                <i class="icon ion-checkmark-circled action done" ng-hide="!siniestro.fotos.licencia"></i>
+
+            <div class="list" ng-if="repairType">
+                <label class="item item-input item-stacked-label" ng-if="repairType == 'time'">
+                    <span class="input-label">Dias que demora la reparación</span>
+                    <input type="number" placeholder="7">
+                </label>
+                <label class="item item-input item-stacked-label" ng-if="repairType == 'date'">
+                    <span class="input-label">Fecha de termino de la reparacion</span>
+                    <input type="date" placeholder="Suhr">
+                </label>
             </div>
+
         </div>
 
-        <div class="card sincard" style="text-align:center; vertical-align:middle;">
-            <div class="sincontainer minibutton" ng-click="repairType = 'time'">
-                <span>Tiempo de reparacion<i class="icon ion-clock" style="float:right; padding-right:10px;"></i></span>
-            </div>
-            <span style="color:#FFF; line-height:40px;">ó</span>
+        <div class="list card">
 
-            <div class="sincontainer minibutton" style="float:right" ng-click="repairType = 'date'">
-                <span>Fecha de reparación<i class="icon ion-calendar"
-                                            style="float:right; padding-right:10px;"></i></span>
+            <div class="item item-divider">
+                <i class="icon ion-cash"></i>
+                Estimación costo
             </div>
 
-            <hr ng-show="repairType"/>
-            <div style="background-color:#FFF; padding:10px; text-align:left;" ng-show="repairType == 'time'">
-                <div style="display:inline;">Ingrese numero de dias que demora la reparación:</div>
-                &nbsp;
-                <input style="display:inline;" type="text" size="2" placeholder="Ej:10"/>
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <input type="text" placeholder="$350.000">
+                </label>
+            </div>
 
-                <div style="display:inline;">dias</div>
-            </div>
-            <div style="background-color:#FFF; padding:10px; text-align:left;" ng-show="repairType == 'date'">
-                <div style="display:inline;">Ingrese la fecha de termino de la reparacion:</div>
-                &nbsp;
-                <input style="display:inline;" type="text" size="10" placeholder="Ej: 2015/04/12"/>
-            </div>
         </div>
 
-        <button class="button button-block button-balanced">Guardar</button>
+        <button class="button button-block button-assertive">Guardar</button>
 
     </ion-content>
 </ion-view>
