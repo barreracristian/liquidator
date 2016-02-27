@@ -17,7 +17,9 @@ angular.module('liquidator.extras', [])
 
     .filter('imagename', function () {
         return function (input, scope) {
-            return input.toLowerCase().replace(" ", "");
+            if(input){
+                return input.toLowerCase().replace(" ", "");
+            }
         }
     })
 

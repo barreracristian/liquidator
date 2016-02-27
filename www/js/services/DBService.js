@@ -2,6 +2,11 @@ angular.module('liquidator.services.DBService', [])
 
     .factory('DBService', function ($q, $timeout, $http) {
 
+        //var URL = "http://52.27.219.34:9000";
+        var URL = "http://localhost:9000";
+        //var URL = "http://192.168.0.103:9000";
+        //var URL = "http://192.168.0.107:9000";
+
         var siniestros = {};
 
         return {

@@ -1,5 +1,4 @@
 var app = angular.module('liquidator', [
-    'liquidator.services',
     'ionic',
     'ngCordova',
     'liquidator.controllers.BusquedaController',
@@ -8,6 +7,7 @@ var app = angular.module('liquidator', [
     'liquidator.controllers.SiniestroController',
     'liquidator.controllers.SucursalController',
     'liquidator.controllers.TalleresController',
+    'liquidator.services.CameraService',
     'liquidator.services.DBService',
     'liquidator.extras',
 ]);
