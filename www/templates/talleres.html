@@ -21,7 +21,7 @@
             <a class="item" ng-href="#/sucursal/{{suc.id}}"
                ng-repeat="suc in taller.sucursales | filter: filtraTalleres">
                 {{suc.nombre | capitalize}}
-                <span class="badge badge-assertive">{{suc.n_noinspec}}</span>
+                <span class="badge badge-assertive" ng-if="suc.n_noinspec > 0">{{suc.n_noinspec}}</span>
             </a>
         </div>
 

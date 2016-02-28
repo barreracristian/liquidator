@@ -4,7 +4,16 @@ angular.module('liquidator.controllers.TalleresController', [])
 
             DBService.getTalleres().then(
                 function (talleres) {
-                    $scope.talleres = talleres;
+                    DBService.getSiniestros().then(function(siniestros){
+
+                        _.each(talleres, function(taller){
+                            _.each(taller.sucursales, function(sucursal){
+                                sucursal.n_noinspec = _.filter(siniestros, {sucursal_id:sucursal.id, estado:"No inspeccionado"}).length;
+                            })
+                        });
+
+                        $scope.talleres = talleres;
+                    })
                 },
                 function (error) {
                     console.log(error);
