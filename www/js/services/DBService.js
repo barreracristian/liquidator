@@ -2,10 +2,9 @@ angular.module('liquidator.services.DBService', [])
 
     .factory('DBService', function ($q, $timeout, $http) {
 
-        //var URL = "http://52.27.219.34:9000";
-        var URL = "http://localhost:9000";
-        //var URL = "http://192.168.0.103:9000";
-        //var URL = "http://192.168.0.107:9000";
+        //var URL = "http://52.27.219.34:3000";
+        var URL = "http://localhost:3000/api";
+        //var URL = "http://192.168.40.4:3000";
 
         var siniestros = {};
 
@@ -14,9 +13,9 @@ angular.module('liquidator.services.DBService', [])
             getTalleres: function () {
                 var p = $q.defer();
 
-                $http.get(URL + "/talleresplus").then(
+                $http.get(URL + "/talleres").then(
                     function (data) {
-                        console.log("------------------ data = " + JSON.stringify(data));
+                        //console.log("------------------ talleres = " + JSON.stringify(data.data));
                         p.resolve(data.data);
                     },
                     function (data, status, headers, config) {
@@ -27,57 +26,35 @@ angular.module('liquidator.services.DBService', [])
                 return p.promise;
             },
 
-            getSucursal: function (sucursalId) {
+            getSiniestros: function () {
                 var p = $q.defer();
 
-                $http.get(URL + "/sucursalplus?id=" + sucursalId).error(function (data, status, headers, config) {
-                    alert("ALERTA SUCURSALES " + status);
-                }).success(function (data) {
-                    //alert(JSON.stringify(data));
-                    p.resolve(data);
-                });
+                $http.get(URL + "/siniestros").then(
+                    function (data) {
+                        //console.log("------------------ siniestros = " + JSON.stringify(data.data));
+                        p.resolve(data.data);
+                    },
+                    function (data, status, headers, config) {
+                        console.log("ERROR getSiniestros status = " + status + " " + JSON.stringify(data));
+                    }
+                );
 
                 return p.promise;
             },
 
-            getSiniestro: function (siniestroId) {
+            getAsegurados: function () {
                 var p = $q.defer();
 
-                if (siniestros[siniestroId]) {
-                    p.resolve(siniestros[siniestroId]);
-                } else {
-                    $http.get(URL + "/siniestroplus?id=" + siniestroId).error(function (data, status, headers, config) {
-                        alert("ALERTA SINIESTRO " + status);
-                    }).success(function (siniestro) {
-                        /*
-                         fotos.inspeccion
-                         fotos.constancia
-                         fotos.padron
-                         fotos.licencia
-                         fotos.libres = [];
-                         */
+                $http.get(URL + "/asegurados").then(
+                    function (data) {
+                        //console.log("------------------ asegurados = " + JSON.stringify(data.data));
+                        p.resolve(data.data);
+                    },
+                    function (data, status, headers, config) {
+                        console.log("ERROR getAsegurados status = " + status + " " + JSON.stringify(data));
+                    }
+                );
 
-                        siniestro.fotos = {};
-                        siniestro.fotos.libres = [];
-
-                        siniestros[siniestro.id] = siniestro;
-
-                        p.resolve(siniestro);
-                    });
-                }
-
-                return p.promise;
-            },
-
-            busquedaSiniestros: function (term) {
-                var p = $q.defer();
-
-                $http.get(URL + "/busqueda?term=" + term).error(function (data, status, headers, config) {
-                    alert("ALERTA BUSQUEDA " + status);
-                }).success(function (data) {
-                    //alert(JSON.stringify(data));
-                    p.resolve(data);
-                });
                 return p.promise;
             },
 

@@ -18,6 +18,14 @@ angular.module('liquidator.controllers.MainController', [])
             });
         };
 
+        $scope.clearFilter = function () {
+            $scope.response = {};
+            $scope.response.estado = null;
+            $scope.response.valor = null;
+        };
+
+        $scope.clearFilter();
+
         $scope.select = {};
         $scope.select.estados = [{
             value: 'No inspeccionado',

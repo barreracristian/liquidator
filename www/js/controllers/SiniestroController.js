@@ -2,20 +2,21 @@ angular.module('liquidator.controllers.SiniestroController', [])
 
     .controller('SiniestroController', function ($scope, $rootScope, $ionicPopup, $stateParams, $state, DBService, CameraService) {
 
-        $scope.documentos = [
-            {name:"Dcto. Constancia Carabineros", id:"constancia"},
-            {name:"Dcto. Padron Auto", id:"padron"},
-            {name:"Dcto. Licencia de Conducir", id:"licencia"},
+        $scope.documentos = [
+            {name: "Dcto. Constancia Carabineros", id: "constancia"},
+            {name: "Dcto. Padron Auto", id: "padron"},
+            {name: "Dcto. Licencia de Conducir", id: "licencia"},
         ];
 
-        DBService.getSiniestro($stateParams.siniestro_id).then(
-            function (siniestro) {
-                $scope.siniestro = siniestro;
-            },
-            function (error) {
-                console.log(error);
-            }
-        );
+        var sinId = parseInt($stateParams.siniestro_id);
+
+        DBService.getSiniestros().then(function (siniestros) {
+            var sin = _.find(siniestros, {id:sinId});
+            DBService.getAsegurados().then(function(asegurados){
+                sin.asegurado = _.find(asegurados, {id: sin.asegurado_id});
+                $scope.siniestro = sin;
+            });
+        });
 
         $scope.takePicture = function (what) {
             CameraService.getPicture().then(function (imageDATA) {

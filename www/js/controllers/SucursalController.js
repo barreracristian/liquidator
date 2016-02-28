@@ -2,26 +2,25 @@ angular.module('liquidator.controllers.SucursalController', [])
 
     .controller('SucursalController', function ($scope, $ionicPopup, $stateParams, $state, DBService) {
 
-            DBService.getSucursal($stateParams.sucursal_id).then(
-                function (sucursal) {
-                    $scope.sucursal = sucursal;
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
+            var sucId = parseInt($stateParams.sucursal_id);
 
-            $scope.clearFilter = function () {
-                $scope.response = {};
-                $scope.response.estado = null;
-            };
-            $scope.clearFilter();
+            DBService.getTalleres().then(function (talleres) {
+                $scope.taller = _.find(talleres, {sucursales: [{id: sucId}]});
+                //console.log("------------------ taller = " + JSON.stringify($scope.taller));
+                var suc = _.find($scope.taller.sucursales, {id: sucId});
 
-            $scope.filtraSiniestros = function (siniestro) {
-                if ($scope.response.estado == null) {
-                    return true;
-                }
-                return siniestro.estado == $scope.response.estado.value;
-            }
+                DBService.getSiniestros().then(function (siniestros) {
+                    suc.siniestros = _.filter(siniestros, {sucursal_id: sucId});
+
+                    DBService.getAsegurados().then(function (asegurados) {
+                        _.each(suc.siniestros, function (siniestro) {
+                            siniestro.asegurado = _.find(asegurados, {id:siniestro.asegurado_id});
+                        });
+                        //console.log("------------------ suc = " + JSON.stringify(suc));
+                        $scope.sucursal = suc;
+                    });
+                });
+            });
+
         }
     );
