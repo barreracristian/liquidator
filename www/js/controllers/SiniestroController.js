@@ -23,7 +23,7 @@ angular.module('liquidator.controllers.SiniestroController', [])
                 var src = "data:image/jpeg;base64," + imageDATA;
 
                 /*
-                 if (what == 'libre') {
+                 if (what == 'libres') {
                  $scope.siniestro.fotos.libres.push(src);
                  } else {
                  $scope.siniestro.fotos[what] = src;

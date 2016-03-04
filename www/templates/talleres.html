@@ -2,8 +2,7 @@
     <ion-nav-title>Talleres</ion-nav-title>
 
     <ion-content class="has-header" padding="true">
-
-
+        
         <!-- div class="subheader filter">
             Filtrar siniestros
             <select ng-model="response.estado" ng-options="e as e.label for e in select.estados"
@@ -18,7 +17,7 @@
         <div class="list card" ng-repeat="taller in talleres">
             <div class="item item-divider">{{taller.nombre | capitalize}}</div>
 
-            <a class="item" ng-href="#/sucursal/{{suc.id}}"
+            <a class="item" ng-class="{'padding-right-badge': suc.n_noinspec > 0}" ng-href="#/sucursal/{{suc.id}}"
                ng-repeat="suc in taller.sucursales | filter: filtraTalleres">
                 {{suc.nombre | capitalize}}
                 <span class="badge badge-assertive" ng-if="suc.n_noinspec > 0">{{suc.n_noinspec}}</span>

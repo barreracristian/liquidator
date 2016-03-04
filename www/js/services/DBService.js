@@ -31,7 +31,9 @@ angular.module('liquidator.services.DBService', [])
 
                 $http.get(URL + "/siniestros").then(
                     function (data) {
-                        //console.log("------------------ siniestros = " + JSON.stringify(data.data));
+                        _.each(data.data, function(sin){
+                            sin.fotos = siniestros[sin.id] ? siniestros[sin.id].fotos : undefined;
+                        });
                         p.resolve(data.data);
                     },
                     function (data, status, headers, config) {
@@ -69,9 +71,12 @@ angular.module('liquidator.services.DBService', [])
                  fotos.libres = [];
                  */
 
-                if (what == 'libre') {
-                    siniestros[sinId].fotos.libres.push(img);
-                } else {
+                siniestros[sinId] = siniestros[sinId] || {fotos:{}};
+
+                if(what == 'libres'){
+                    siniestros[sinId].fotos[what] = siniestros[sinId].fotos[what] || [];
+                    siniestros[sinId].fotos[what].push(img);
+                }else{
                     siniestros[sinId].fotos[what] = img;
                 }
 

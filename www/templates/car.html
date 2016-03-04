@@ -1,28 +1,30 @@
-<ion-content scroll="false" style="background-color:#112C5E !important;">
+<ion-view>
+    <ion-nav-title>Siniestro {{siniestro.id}}</ion-nav-title>
 
-    <style type="text/css">
+    <ion-nav-buttons side="primary">
+        <button class="button button-icon icon ion-reply" ng-click="undo()"></button>
+        <button class="button button-icon icon ion-ios-download" ng-click="save()"></button>
+    </ion-nav-buttons>
 
-        #content{
-            position: absolute;
-            top: 70px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            overflow:hidden;
-        }
-        #canvas{
-            cursor:crosshair ;
-            background-color:#fff;
-        }
-    </style>
+    <ion-content scroll="false" class="has-header" padding="true">
 
-    <div>
-        <div style="text-align:center; padding:10px 10px 0 10px;">
-            <button class="button button-positive" ng-click="newCanvas()" style="float:left;">Nuevo</button>
-            <button class="button button-balanced" ng-click="save()">Guardar y Volver</button>
-            <button class="button button-positive" ng-click="" style="float:right;">Deshacer</button>
-        </div>
+        <style type="text/css" scoped>
+            #content {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                overflow: hidden;
+            }
+
+            #canvas {
+                cursor: crosshair;
+                background-color: #fff;
+            }
+        </style>
+
         <div id="content"></div>
-    </div>
 
-</ion-content>
+    </ion-content>
+</ion-view>

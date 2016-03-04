@@ -1,9 +1,25 @@
 
+.nav-bar-title {
+    text-align: center !important;
+}
+
+.item .badge {
+    right: 15px;
+}
+
+.padding-right-badge{
+    padding-right: 50px !important;
+}
+
+.pane{
+    background-color: #DADADA !important;
+}
+
 /* ----------------- talleres y sucursales -----------------*/
 
-.inspeccion{
-    margin-top:-40px;
-    width:200px;
+.inspeccion {
+    margin-top: -40px;
+    width: 200px;
 
     -webkit-transform: rotate(270deg);
     -moz-transform: rotate(270deg);

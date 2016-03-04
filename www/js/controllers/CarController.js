@@ -5,8 +5,11 @@ angular.module('liquidator.controllers.CarController', [])
         var CTX;
         var COLOR = "#F00";
         var LINE_WIDTH = 5;
-        var DESFASE_Y = 70;
+        var DESFASE_Y = 50;
         var DESFASE_X = 10;
+
+        var states = [];
+
 
         //document.addEventListener("DOMContentLoaded", function(){
         setTimeout(function () {
@@ -16,7 +19,7 @@ angular.module('liquidator.controllers.CarController', [])
 
         $scope.newCanvas = function () {
             var canvasWidth = window.innerWidth - 20;
-            var canvasHeight = window.innerHeight - 80;
+            var canvasHeight = window.innerHeight - 60;
 
             document.getElementById("content").style.height = canvasHeight;
             var canvas = '<canvas id="canvas" width="' + canvasWidth + '" height="' + canvasHeight + '"></canvas>';
@@ -31,14 +34,16 @@ angular.module('liquidator.controllers.CarController', [])
             img.src = "img/auto_v.png";
             img.onload = function () {
                 CTX.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-            }
+            };
 
             drawTouch();
             drawPointer();
             drawMouse();
-        }
+        };
 
         $scope.save = function () {
+            console.log("------------------ save");
+
             var canvas = document.getElementById("canvas");
             var img = canvas.toDataURL("image/png");
 
@@ -50,7 +55,11 @@ angular.module('liquidator.controllers.CarController', [])
                     console.log("save err = " + err);
                 }
             );
-        }
+        };
+
+        $scope.undo = function(){
+            console.log("------------------ undo");
+        };
 
         var drawTouch = function () {
             var start = function (e) {
