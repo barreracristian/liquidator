@@ -32,7 +32,7 @@
                     <li>{{siniestro.asegurado.rut}}</li>
                     <li>{{siniestro.asegurado.telefono}}</li>
                 </ul>
-                <button class="button button-positive">
+                <button class="button button-balanced">
                     <i class="icon ion-ios-telephone"></i>
                 </button>
             </div>
@@ -56,7 +56,7 @@
 
             <div class="item item-button-right" ng-if="!siniestro.fotos.inspeccion">
                 No existe imagen. Click para crear
-                <button class="button button-positive" ng-click="showCar(siniestro)">
+                <button class="button button-balanced" ng-click="showCar(siniestro)">
                     <i class="icon ion-edit"></i>
                 </button>
             </div>
@@ -76,7 +76,7 @@
             </div>
 
             <div class="item">
-                <button class="button button-small button-block button-positive" ng-click="takePicture('libre')">
+                <button class="button button-small button-block button-balanced" ng-click="takePicture('libre')">
                     Tomar Fotos
                 </button>
             </div>
@@ -92,7 +92,7 @@
 
             <div class="item item-button-right" ng-repeat="doc in documentos">
                 {{doc.name}}
-                <button class="button button-positive"
+                <button class="button button-balanced"
                         ng-if="!siniestro.fotos[doc.id]"
                         ng-click="takePicture(doc.id)">
                     <i class="icon ion-camera"></i>
@@ -110,8 +110,8 @@
 
             <div class="item">
                 <div class="button-bar">
-                    <a class="button button-small button-positive" ng-click="repairType = 'time'">Tiempo</a>
-                    <a class="button button-small button-positive" ng-click="repairType = 'date'">Fecha</a>
+                    <a class="button button-small button-balanced" ng-click="repairType = 'time'">Tiempo</a>
+                    <a class="button button-small button-balanced" ng-click="repairType = 'date'">Fecha</a>
                 </div>
             </div>
 

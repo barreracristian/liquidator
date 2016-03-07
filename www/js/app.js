@@ -3,6 +3,7 @@ var app = angular.module('liquidator', [
     'ngCordova',
     'liquidator.controllers.BusquedaController',
     'liquidator.controllers.CarController',
+    'liquidator.controllers.LoginController',
     'liquidator.controllers.MainController',
     'liquidator.controllers.SiniestroController',
     'liquidator.controllers.SucursalController',
@@ -38,6 +39,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
     $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'LoginController'
+        })
         .state('talleres', {
             url: '/talleres',
             templateUrl: 'templates/talleres.html',
@@ -66,5 +72,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
             cache: false
         });
 
-    $urlRouterProvider.otherwise("/talleres");
+    $urlRouterProvider.otherwise("/login");
 });
