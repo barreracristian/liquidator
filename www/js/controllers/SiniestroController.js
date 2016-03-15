@@ -1,6 +1,7 @@
 angular.module('liquidator.controllers.SiniestroController', [])
 
-    .controller('SiniestroController', function ($scope, $rootScope, $ionicPopup, $stateParams, $state, DBService, CameraService) {
+    .controller('SiniestroController', function ($scope, $rootScope, $ionicPopup, $stateParams, $state,
+                                                 DBService, CameraService) {
 
         $scope.documentos = [
             {name: "Dcto. Constancia Carabineros", id: "constancia"},
@@ -43,6 +44,5 @@ angular.module('liquidator.controllers.SiniestroController', [])
                 siniestro_id: siniestro.id
             });
         };
-
 
     });

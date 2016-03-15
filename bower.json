@@ -6,6 +6,10 @@
   },
   "dependencies": {
     "lodash": "^4.5.1",
-    "ngCordova": "^0.1.24-alpha"
+    "ngCordova": "^0.1.24-alpha",
+    "angular-local-storage": "^0.2.5",
+    "angular-socket-io": "^0.7.0",
+    "socket.io-client": "sio-client#^1.4.4",
+    "moment": "^2.12.0"
   }
 }

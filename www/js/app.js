@@ -1,6 +1,8 @@
 var app = angular.module('liquidator', [
     'ionic',
     'ngCordova',
+    'LocalStorageModule',
+    'btford.socket-io',
     'liquidator.controllers.BusquedaController',
     'liquidator.controllers.CarController',
     'liquidator.controllers.LoginController',
@@ -9,11 +11,13 @@ var app = angular.module('liquidator', [
     'liquidator.controllers.SucursalController',
     'liquidator.controllers.TalleresController',
     'liquidator.services.CameraService',
+    'liquidator.services.ComService',
     'liquidator.services.DBService',
+    'liquidator.services.SocketService',
     'liquidator.extras',
 ]);
 
-app.run(function ($ionicPlatform) {
+app.run(function ($ionicPlatform, ComService) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -25,6 +29,8 @@ app.run(function ($ionicPlatform) {
             //StatusBar.styleDefault();
             window.StatusBar.styleLightContent();
         }
+
+        ComService.join();
     });
 });
 
