@@ -1,7 +1,7 @@
 angular.module('liquidator.controllers.SiniestroController', [])
 
     .controller('SiniestroController', function ($scope, $rootScope, $ionicPopup, $stateParams, $state,
-                                                 DBService, CameraService) {
+                                                 DBService, CameraService, ComService) {
 
         $scope.documentos = [
             {name: "Dcto. Constancia Carabineros", id: "constancia"},
@@ -19,7 +19,13 @@ angular.module('liquidator.controllers.SiniestroController', [])
             });
         });
 
+        $scope.action = function(which){
+            var action = {sinId:sinId, type:which, detail:'not available'};
+            ComService.sendAction(action);
+        };
+
         $scope.takePicture = function (what) {
+            $scope.action('picture');
             CameraService.getPicture().then(function (imageDATA) {
                 var src = "data:image/jpeg;base64," + imageDATA;
 

@@ -26,8 +26,12 @@ angular.module('liquidator.controllers.TalleresController', [])
             /* ---------- */
 
             var username = localStorageService.get('username');
-            console.log("------------------ username = " + username);
+            //console.log("------------------ username = " + username);
             //localStorageService.set('username', username);
+
+            $scope.isConnected = function () {
+                return ComService.isConnected();
+            }
 
         }
     );

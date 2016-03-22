@@ -13,7 +13,6 @@ var app = angular.module('liquidator', [
     'liquidator.services.CameraService',
     'liquidator.services.ComService',
     'liquidator.services.DBService',
-    'liquidator.services.SocketService',
     'liquidator.extras',
 ]);
 
@@ -53,7 +52,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('talleres', {
             url: '/talleres',
             templateUrl: 'templates/talleres.html',
-            controller: 'TalleresController'
+            controller: 'TalleresController',
         })
         .state('sucursal', {
             url: '/sucursal/:sucursal_id',
