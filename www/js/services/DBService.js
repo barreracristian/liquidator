@@ -3,8 +3,8 @@ angular.module('liquidator.services.DBService', [])
     .factory('DBService', function ($q, $timeout, $http) {
 
         //var URL = "http://ec2-52-26-252-211.us-west-2.compute.amazonaws.com:3000/api";
-        var URL = "http://localhost:3000/api";
-        //var URL = "http://192.168.40.4:3000";
+        //var URL = "http://localhost:3000/api";
+        var URL = "http://192.168.0.102:3000/api";
 
         var siniestros = {};
 
