@@ -12,38 +12,43 @@ angular.module('liquidator.controllers.SiniestroController', [])
         var sinId = parseInt($stateParams.siniestro_id);
 
         DBService.getSiniestros().then(function (siniestros) {
-            var sin = _.find(siniestros, {id:sinId});
-            DBService.getAsegurados().then(function(asegurados){
+            var sin = _.find(siniestros, {id: sinId});
+            DBService.getAsegurados().then(function (asegurados) {
                 sin.asegurado = _.find(asegurados, {id: sin.asegurado_id});
                 $scope.siniestro = sin;
             });
         });
 
-        $scope.action = function(which){
-            var action = {sinId:sinId, type:which, detail:'not available'};
+        $scope.action = function (which) {
+            var action = {sinId: sinId, type: which, detail: 'not available'};
             ComService.sendAction(action);
         };
 
-        $scope.takePicture = function (what) {
-            $scope.action('picture');
-            CameraService.getPicture().then(function (imageDATA) {
-                var src = "data:image/jpeg;base64," + imageDATA;
+        document.addEventListener("deviceready", function() {
+            console.log("------------------ DEVICE READY");
 
-                /*
-                 if (what == 'libres') {
-                 $scope.siniestro.fotos.libres.push(src);
-                 } else {
-                 $scope.siniestro.fotos[what] = src;
-                 }
-                 */
+            $scope.takePicture = function (what) {
+                $scope.action('picture');
+                CameraService.getPicture().then(function (imageDATA) {
+                    var src = "data:image/jpeg;base64," + imageDATA;
 
-                DBService.saveImage($scope.siniestro.id, what, src);
+                    /*
+                     if (what == 'libres') {
+                     $scope.siniestro.fotos.libres.push(src);
+                     } else {
+                     $scope.siniestro.fotos[what] = src;
+                     }
+                     */
 
-                //$scope.data.imagetaken = imageURI;
-            }, function (err) {
-                console.log(err);
-            });
-        };
+                    DBService.saveImage($scope.siniestro.id, what, src);
+
+                    //$scope.data.imagetaken = imageURI;
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
+        }, false);
 
         $scope.showCar = function (siniestro) {
             $state.go('car', {
