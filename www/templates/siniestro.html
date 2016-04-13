@@ -69,16 +69,28 @@
                 <textarea placeholder="Escribir comentarios aqui" style="height: 100px"></textarea>
             </label>
 
-            <div class="row" ng-show="siniestro.fotos.libres.length > 0">
-                <div class="col col-25" ng-repeat="foto in siniestro.fotos.libres">
-                    <img ng-src="{{foto}}"/>
-                </div>
-            </div>
+            <style scoped>
+                .img_sending{
+                    border:2px solid yellow;
+                }
+                .img_sent{
+                    border:2px solid green;
+                }
+                .img_not{
+                    border:2px solid red;
+                }
+            </style>
 
-            <div class="item">
-                <button class="button button-small button-block button-balanced" ng-click="takePicture('libre')">
-                    Tomar Fotos
-                </button>
+            <div class="libres">
+                <div class="libre" ng-repeat="photo in photos[siniestro.id].libre">
+                    <img ng-src="{{photo.image}}" class="img_{{photo.synchroStatus || 'not'}}" />
+                </div><!--
+              --><div class="libre skeleton">
+                        <button class="button button-balanced"
+                                ng-click="takePicture('libre')">
+                            <i class="icon ion-camera"></i>
+                        </button>
+                </div>
             </div>
 
         </div>

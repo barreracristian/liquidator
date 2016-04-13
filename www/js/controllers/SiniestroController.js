@@ -19,28 +19,22 @@ angular.module('liquidator.controllers.SiniestroController', [])
             });
         });
 
+        getPhotos();
+
         $scope.action = function (which) {
-            var action = {sinId: sinId, type: which, detail: 'not available'};
-            ComService.sendAction(action);
+            ComService.sendAction(sinId, which);
         };
 
-        document.addEventListener("deviceready", function() {
+        document.addEventListener("deviceready", function () {
             console.log("------------------ DEVICE READY");
 
-            $scope.takePicture = function (what) {
+            $scope.takePicture = function (type) {
                 $scope.action('picture');
-                CameraService.getPicture().then(function (imageDATA) {
-                    var src = "data:image/jpeg;base64," + imageDATA;
 
-                    /*
-                     if (what == 'libres') {
-                     $scope.siniestro.fotos.libres.push(src);
-                     } else {
-                     $scope.siniestro.fotos[what] = src;
-                     }
-                     */
+                CameraService.getPicture($scope.siniestro.id).then(function (imageData) {
 
-                    DBService.saveImage($scope.siniestro.id, what, src);
+                    var photo = getPhotoObj($scope.siniestro.id, type, imageData);
+                    ComService.sendPhoto(photo);
 
                     //$scope.data.imagetaken = imageURI;
                 }, function (err) {
@@ -49,6 +43,27 @@ angular.module('liquidator.controllers.SiniestroController', [])
             };
 
         }, false);
+
+        function getPhotoObj(sinId, type, image){
+            var obj = {sinId:sinId, type:type, image:image};
+            $scope.photos[sinId] = $scope.photos[sinId] || {};
+            $scope.photos[sinId][type] = $scope.photos[sinId][type] || [];
+            $scope.photos[sinId][type].push(obj);
+            return obj;
+        }
+
+        function getPhotos() {
+            $scope.photos = DBService.getPhotos();
+
+            if (false) {
+                getPhotoObj('1512', 'libre', 'http://e03-elmundo.uecdn.es/assets/multimedia/imagenes/2015/11/13/14474300157302.jpg');
+                getPhotoObj('1512', 'libre', 'http://los40.com/los40/imagenes/2015/01/13/album/1421169887_726886_1421169997_album_normal.jpg');
+                getPhotoObj('1512', 'libre', 'http://los40.com/los40/imagenes/2015/01/13/album/1421169887_726886_1421169998_album_normal.jpg');
+                getPhotoObj('1512', 'libre', 'http://los40.com/los40/imagenes/2015/01/13/album/1421169887_726886_1421169999_album_normal.jpg');
+                getPhotoObj('1512', 'libre', 'http://los40.com/los40/imagenes/2015/01/13/album/1421169887_726886_1421170058_album_normal.jpg');
+                getPhotoObj('1512', 'libre', 'http://los40.com/los40/imagenes/2015/01/13/album/1421169887_726886_1421170066_album_normal.jpg');
+            }
+        }
 
         $scope.showCar = function (siniestro) {
             $state.go('car', {

@@ -4,9 +4,7 @@ angular.module('liquidator.services.DBService', [])
 
         //var URL = "http://ec2-52-26-252-211.us-west-2.compute.amazonaws.com:3000/api";
         //var URL = "http://localhost:3000/api";
-        var URL = "http://192.168.0.102:3000/api";
-
-        var siniestros = {};
+        var URL = "http://192.168.0.100:3000/api";
 
         return {
 
@@ -31,9 +29,6 @@ angular.module('liquidator.services.DBService', [])
 
                 $http.get(URL + "/siniestros").then(
                     function (data) {
-                        _.each(data.data, function(sin){
-                            sin.fotos = siniestros[sin.id] ? siniestros[sin.id].fotos : undefined;
-                        });
                         p.resolve(data.data);
                     },
                     function (data, status, headers, config) {
@@ -60,29 +55,8 @@ angular.module('liquidator.services.DBService', [])
                 return p.promise;
             },
 
-            saveImage: function (sinId, what, img) {
-                var p = $q.defer();
-
-                /*
-                 fotos.inspeccion
-                 fotos.constancia
-                 fotos.padron
-                 fotos.licencia
-                 fotos.libres = [];
-                 */
-
-                siniestros[sinId] = siniestros[sinId] || {fotos:{}};
-
-                if(what == 'libres'){
-                    siniestros[sinId].fotos[what] = siniestros[sinId].fotos[what] || [];
-                    siniestros[sinId].fotos[what].push(img);
-                }else{
-                    siniestros[sinId].fotos[what] = img;
-                }
-
-                p.resolve(img);
-
-                return p.promise;
+            getPhotos: function(){
+                return {};
             }
 
         }

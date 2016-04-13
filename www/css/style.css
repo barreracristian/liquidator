@@ -34,3 +34,27 @@ select {
     width: 100% !important;
     max-width: 100% !important;
 }
+
+.libres{
+    padding:2px;
+}
+
+.libre {
+    display: inline-block;
+    border: 2px solid white;
+    width: 25%;
+    height: 23vw;
+    overflow: hidden;
+    background-color: lightgray;
+}
+
+.libre img{
+    width: 100%;
+}
+
+.libre.skeleton{
+    background-color: white;
+    border: 2px solid lightgray;
+    text-align: center;
+    padding-top: 6.5vw;
+}
