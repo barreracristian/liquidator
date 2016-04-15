@@ -70,10 +70,10 @@
             </label>
 
             <style scoped>
-                .img_sending{
+                .img_uploading{
                     border:2px solid yellow;
                 }
-                .img_sent{
+                .img_uploaded{
                     border:2px solid green;
                 }
                 .img_not{
@@ -83,7 +83,7 @@
 
             <div class="libres">
                 <div class="libre" ng-repeat="photo in photos[siniestro.id].libre">
-                    <img ng-src="{{photo.image}}" class="img_{{photo.synchroStatus || 'not'}}" />
+                    <img ng-src="{{photo.image}}" class="img_{{photo.uploadingStatus || 'not'}}" />
                 </div><!--
               --><div class="libre skeleton">
                         <button class="button button-balanced"

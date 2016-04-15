@@ -1,7 +1,7 @@
 angular.module('liquidator.controllers.SiniestroController', [])
 
     .controller('SiniestroController', function ($scope, $rootScope, $ionicPopup, $stateParams, $state,
-                                                 DBService, CameraService, ComService) {
+                                                 DBService, CameraService, ComService, SynchroService) {
 
         $scope.documentos = [
             {name: "Dcto. Constancia Carabineros", id: "constancia"},
@@ -34,7 +34,7 @@ angular.module('liquidator.controllers.SiniestroController', [])
                 CameraService.getPicture($scope.siniestro.id).then(function (imageData) {
 
                     var photo = getPhotoObj($scope.siniestro.id, type, imageData);
-                    ComService.sendPhoto(photo);
+                    SynchroService.save(obj);
 
                     //$scope.data.imagetaken = imageURI;
                 }, function (err) {

@@ -1,6 +1,7 @@
 var app = angular.module('liquidator', [
     'ionic',
     'ngCordova',
+    'ngStorage',
     'LocalStorageModule',
     'btford.socket-io',
     'liquidator.controllers.BusquedaController',
@@ -13,6 +14,8 @@ var app = angular.module('liquidator', [
     'liquidator.services.CameraService',
     'liquidator.services.ComService',
     'liquidator.services.DBService',
+    'liquidator.services.StorageService',
+    'liquidator.services.SynchroService',
     'liquidator.extras',
 ]);
 
